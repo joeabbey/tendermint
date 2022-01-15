@@ -6,8 +6,8 @@ import (
 )
 
 const (
-	PrivKeyName = "tendermint/PrivKeySr25519"
-	PubKeyName  = "tendermint/PubKeySr25519"
+	privKeyName = "tendermint/PrivKeySr25519"
+	pubKeyName  = "tendermint/PubKeySr25519"
 )
 
 func init() {
@@ -16,6 +16,8 @@ func init() {
 
 	jsontypes.MustRegister(PubKey{})
 	jsontypes.MustRegister(PrivKey{})
+	crypto.RegisterPubKeyType(pubKeyName, PubKey(nil))
+	crypto.RegisterPrivKeyType(privKeyName, PrivKey{})
 }
 
 //go:generate -command gen go run github.com/tendermint/tendermint/scripts/tmjson
