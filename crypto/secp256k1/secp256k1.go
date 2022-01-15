@@ -17,6 +17,9 @@ import (
 	"golang.org/x/crypto/ripemd160" // nolint
 )
 
+//go:generate -command gen go run github.com/tendermint/tendermint/scripts/tmjson
+//go:generate gen -output generated.go -pkg secp256k1 -prefix tendermint/ PubKey=+PubKeySecp256k1 PrivKey=+PrivKeySecp256k1
+
 //-------------------------------------
 const (
 	PrivKeyName = "tendermint/PrivKeySecp256k1"
