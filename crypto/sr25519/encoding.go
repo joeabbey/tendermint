@@ -17,3 +17,6 @@ func init() {
 	jsontypes.MustRegister(PubKey{})
 	jsontypes.MustRegister(PrivKey{})
 }
+
+//go:generate -command gen go run github.com/tendermint/tendermint/scripts/tmjson
+//go:generate gen -output generated.go -pkg sr25519 PubKey=tendermint/PubKeySr25519
