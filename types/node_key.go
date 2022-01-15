@@ -85,7 +85,7 @@ func LoadNodeKey(filePath string) (NodeKey, error) {
 		return NodeKey{}, err
 	}
 	nodeKey := NodeKey{}
-	err = tmjson.Unmarshal(jsonBytes, &nodeKey)
+	err = json.Unmarshal(jsonBytes, &nodeKey)
 	if err != nil {
 		return NodeKey{}, err
 	}
