@@ -134,7 +134,7 @@ func (blockExec *BlockExecutor) ApplyBlock(
 	state State, blockID types.BlockID, block *types.Block,
 ) (State, int64, error) {
 
-	profile_path := os.Getenv("DAEMOON_PROFILE_PATH")
+	profile_path := os.Getenv("DAEMON_PROFILE_PATH")
 	if _, err := os.Stat(profile_path); !os.IsNotExist(err) {
 		cpuprofile := fmt.Sprintf("%s/block_%d.prof", profile_path, block.Height)
 
