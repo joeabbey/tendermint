@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"reflect"
 	"time"
-	"os"
-	"runtime/pprof"
+
 
 	bc "github.com/tendermint/tendermint/blockchain"
 	"github.com/tendermint/tendermint/libs/log"
@@ -389,16 +388,6 @@ FOR_LOOP:
 				}
 				continue FOR_LOOP
 			} else {
-				cpuprofile := fmt.Sprintf("block_%d.prof", first.Height)
-
-				f, err := os.Create(cpuprofile)
-        		if err != nil {
-            		panic(fmt.Sprintf("could not create CPU profile: ", err))
-        		}
-				if err := pprof.StartCPUProfile(f); err != nil {
-					panic(fmt.Sprintf("could not start CPU profile: ", err))
-				}
-			
 				bcR.pool.PopRequest()
 
 				// TODO: batch saves so we dont persist to disk every block
@@ -419,8 +408,6 @@ FOR_LOOP:
 						"max_peer_height", bcR.pool.MaxPeerHeight(), "blocks/s", lastRate)
 					lastHundred = time.Now()
 				}
-				pprof.StopCPUProfile()
-				f.Close()
 			}
 
 			continue FOR_LOOP
